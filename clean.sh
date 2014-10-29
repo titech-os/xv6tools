@@ -1,5 +1,6 @@
 #!/bin/sh
-# Installation script for Xv6 building tools on Mac OS X
+# xv6tools: Installation script for xv6 building tools on Mac OS X
+# Takuo Watanabe
 # (see http://pdos.csail.mit.edu/6.828/2014/tools.html)
 
 usage="Usage: $0 [--clean][--distclean][--sources][--qemu-sources][--archives][--installation][--prefix]"
@@ -56,7 +57,7 @@ ds="bin etc $TARGET include lib libexec share var"
 if [ -n "$remove_installation" ]; then
     dds="{`echo $ds | tr ' ' ','`}"
     really_remove_installation=
-    echo $n "Not: Removing $PREFIX/$dds permanently. Are you sure? [yes/No] $c"
+    echo $n "Note: Removing $PREFIX/$dds permanently. Are you sure? [yes/No] $c"
     read ans
     case "$ans" in
     yes|Yes) really_remove_installation=y;;
@@ -71,9 +72,6 @@ fi
 
 if [ -n "$remove_sources" ]; then
     cd $SRCDIR
-    $RM -r $DIR_GMP
-    $RM -r $DIR_MPFR
-    $RM -r $DIR_MPC
     $RM -r $DIR_BINUTILS
     $RM -r $DIR_GCC
     $RM -r $DIR_GDB
@@ -88,9 +86,6 @@ fi
 
 if [ -n "$remove_archives" ]; then
     cd $ARCDIR
-    $RM $PKG_GMP
-    $RM $PKG_MPFR
-    $RM $PKG_MPC
     $RM $PKG_BINUTILS
     $RM $PKG_GCC
     $RM $PKG_GDB
@@ -98,12 +93,6 @@ if [ -n "$remove_archives" ]; then
 fi
 
 if [ -n "$distclean_sources" ]; then
-    cd $SRCDIR/$DIR_GMP
-    make distclean
-    cd $SRCDIR/$DIR_MPFR
-    make distclean
-    cd $SRCDIR/$DIR_MPC
-    make distclean
     cd $SRCDIR/$DIR_BINUTILS
     make distclean
     cd $SRCDIR/$DIR_GCC
@@ -116,12 +105,6 @@ if [ -n "$distclean_sources" ]; then
 fi
 
 if [ -n "$clean_sources" ]; then
-    cd $SRCDIR/$DIR_GMP
-    make clean
-    cd $SRCDIR/$DIR_MPFR
-    make clean
-    cd $SRCDIR/$DIR_MPC
-    make clean
     cd $SRCDIR/$DIR_BINUTILS
     make clean
     cd $SRCDIR/$DIR_GCC
