@@ -95,8 +95,10 @@ fi
 if [ -n "$distclean_sources" ]; then
     cd $SRCDIR/$DIR_BINUTILS
     make distclean
-    cd $SRCDIR/$DIR_GCC
+    cd $SRCDIR/$DIR_GCC/build
     make distclean
+    cd $SRCDIR/$DIR_GCC
+    rm -rf build
     cd $SRCDIR/$DIR_GDB
     make distclean
     cd $SRCDIR/$DIR_QEMU
@@ -107,7 +109,7 @@ fi
 if [ -n "$clean_sources" ]; then
     cd $SRCDIR/$DIR_BINUTILS
     make clean
-    cd $SRCDIR/$DIR_GCC
+    cd $SRCDIR/$DIR_GCC/build
     make clean
     cd $SRCDIR/$DIR_GDB
     make clean
