@@ -2,14 +2,14 @@ xv6tools
 ======
 Installation script for xv6 building tools (for Mac OS X)
 
-This script installs an i368-elf toolchain (binutils, gcc and gdb) and a PC emulator (QEMU). See the following site for details on what will be installed.
+This script installs an i368-elf toolchain (binutils, gcc and gdb) and a patched version of QEMU. See the following site for details on what will be installed.
 
 * http://pdos.csail.mit.edu/6.828/2014/tools.html
 
 Usage
 ------
 
-In prior to use the script, install required libraries and tools. Use of a package management system (such as HomeBrew or MacPorts) is recommended.
+Before using the script, be sure to install required libraries and tools. Use of a package management system (such as HomeBrew or MacPorts) is recommended.
 
 HomeBrew:
 
@@ -31,8 +31,15 @@ If you want to specify an installation prefix other than the default (`/opt/os`)
 
     $ PREFIX=~/xv6tools sh install.sh
 
-The above example command installs under `~/xv6tools` instead of `/opt/os`.
+This example command installs under `~/xv6tools` instead of `/opt/os`.
 
 After successful installation, use `clean.sh` script to cleanup the source directories.
 
     $ sh clean.sh --clean
+
+Note: Building of gcc may fail if you have a recent version (5.2) of texinfo package installed with MacPorts. To avoid this, deactivate texinfo temporarily.
+
+    $ sudo -f deactivate texinfo
+    $ sh install.sh
+    $ sudo -f activate texinfo
+
