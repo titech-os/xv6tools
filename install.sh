@@ -36,6 +36,11 @@ if [ "x${LIB_PREFIX}" = "x" ]; then
     exit 1
 fi
 
+LIBICONV_CONFIG_OPTION=
+if [ -f ${LIB_PREFIX}/lib/libiconv.dylib ]; then
+    LIBICONV_CONFIG_OPTION="--with-libiconv-prefix=${LIB_PREFIX}"
+fi
+
 if [ ! `which pkg-config` ]; then
     echo "Error: pkg-config is required"
     exit 1
@@ -76,7 +81,8 @@ if [ ! -x ${PREFIX}/bin/${TARGET}-gcc ]; then
     ../configure --prefix=$PREFIX --target=$TARGET --disable-werror \
         --disable-libssp --disable-libmudflap --with-newlib \
         --without-headers --enable-languages=c \
-        --with-gmp=$LIB_PREFIX --with-mpfr=$LIB_PREFIX --with-mpc=$LIB_PREFIX
+        --with-gmp=$LIB_PREFIX --with-mpfr=$LIB_PREFIX --with-mpc=$LIB_PREFIX \
+	${LIBICONV_CONFIG_OPTION}
     make all-gcc
     make install-gcc
     make all-target-libgcc
