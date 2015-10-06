@@ -13,11 +13,11 @@ Before using the script, be sure to install required libraries and tools. Use of
 
 HomeBrew:
 
-    $ brew install libmpc glib pixman
+    $ brew install libmpc glib pixman pkgconfig
 
 MacPorts:
 
-    $ sudo port install libmpc libpixman
+    $ sudo port install libmpc libpixman pkgconfig
 
 Then, install the toolchain and QEMU with `install.sh`.
 
@@ -39,7 +39,7 @@ After successful installation, use `clean.sh` script to cleanup the source direc
 
 Note: Building of gcc may fail if you have a recent version (5.2) of texinfo package installed with MacPorts. To avoid this, deactivate texinfo temporarily.
 
-    $ sudo -f deactivate texinfo
+    $ sudo port -f deactivate texinfo
     $ sh install.sh
-    $ sudo -f activate texinfo
+    $ sudo port -f activate texinfo
 
