@@ -1,7 +1,7 @@
 #!/bin/sh
-# xv6tools: Installation script for xv6 building tools on Mac OS X
+# xv6tools: Installation script for xv6 building tools on macOS
 # Takuo Watanabe
-# (see http://pdos.csail.mit.edu/6.828/2014/tools.html)
+# (see http://pdos.csail.mit.edu/6.828/2017/tools.html)
 
 thisdir=$(cd $(dirname $0) && pwd)
 
@@ -12,7 +12,6 @@ PATDIR=${thisdir}/patches
 PATCH_BINUTILS=${PATDIR}/${DIR_BINUTILS}.patch
 PATCH_GCC=${PATDIR}/${DIR_GCC}.patch
 PATCH_GDB=${PATDIR}/${DIR_GDB}.patch
-PATCH_QEMU=${PATDIR}/${DIR_QEMU}.patch
 
 CMD_GET="curl -L -O"
 #CMD_GET="wget"
@@ -54,8 +53,6 @@ if [ ! -f ${PKG_GCC} ]; then ${CMD_GET} ${URL_GCC}; fi
 if [ ! -f ${PKG_GDB} ]; then ${CMD_GET} ${URL_GDB}; fi
 
 cd ${SRCDIR}
-if [ ! -d ${DIR_QEMU} ]; then ${GIT} clone ${URL_QEMU} -b ${BR_QEMU}; fi
-
 if [ ! -d ${DIR_BINUTILS} ]; then ${TAR} xjf ${ARCDIR}/${PKG_BINUTILS}; fi
 if [ ! -d ${DIR_GCC} ]; then ${TAR} xjf ${ARCDIR}/${PKG_GCC}; fi
 if [ ! -d ${DIR_GDB} ]; then ${TAR} xjf ${ARCDIR}/${PKG_GDB}; fi
@@ -97,16 +94,6 @@ if [ ! -x ${PREFIX}/bin/${TARGET}-gdb ]; then
         --program-prefix=$TARGET- --disable-werror \
         --with-gmp=$LIB_PREFIX --with-mpfr=$LIB_PREFIX --with-mpc=$LIB_PREFIX
     make all
-    make install
-fi
-
-if [ ! -x ${PREFIX}/bin/qemu-system-i386 ]; then
-    echo Building and installing ${DIR_QEMU}
-    cd ${SRCDIR}/${DIR_QEMU}
-    if [ -f ${PATCH_QEMU} ]; then patch -p1 < ${PATCH_QEMU}; fi
-    ./configure --prefix=$PREFIX --disable-kvm --disable-sdl \
-        --target-list="i386-softmmu x86_64-softmmu"
-    make
     make install
 fi
 

@@ -1,10 +1,10 @@
 xv6tools
 ======
-Installation script for xv6 building tools (for Mac OS X)
+Installation script for xv6 building tools (for macOS)
 
 This script installs an i368-elf toolchain (binutils, gcc and gdb) and a patched version of QEMU. See the following site for details on what will be installed.
 
-* http://pdos.csail.mit.edu/6.828/2014/tools.html
+* http://pdos.csail.mit.edu/6.828/2017/tools.html
 
 Usage
 ------
@@ -19,7 +19,7 @@ MacPorts:
 
     $ sudo port install libmpc libpixman pkgconfig
 
-Then, install the toolchain and QEMU with `install.sh`.
+Then, install the toolchain with `install.sh`.
 
     $ sh install.sh
 
@@ -37,7 +37,7 @@ After successful installation, use `clean.sh` script to cleanup the source direc
 
     $ sh clean.sh --clean
 
-Note: Building of gcc may fail if you have a recent version (5.2) of texinfo package installed with MacPorts. To avoid this, deactivate texinfo temporarily.
+Note: Building of gcc may fail if you have a recent version (>= 5.2) of texinfo package installed with MacPorts. To avoid this, deactivate texinfo temporarily.
 
     $ sudo port -f deactivate texinfo
     $ sh install.sh

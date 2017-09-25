@@ -1,9 +1,9 @@
 #!/bin/sh
-# xv6tools: Installation script for xv6 building tools on Mac OS X
+# xv6tools: Installation script for xv6 building tools on macOS
 # Takuo Watanabe
 # (see http://pdos.csail.mit.edu/6.828/2014/tools.html)
 
-usage="Usage: $0 [--clean][--distclean][--sources][--qemu-sources][--archives][--installation][--prefix]"
+usage="Usage: $0 [--clean][--distclean][--sources][--archives][--installation][--prefix]"
 
 thisdir=$(cd $(dirname $0) && pwd)
 
@@ -12,7 +12,6 @@ thisdir=$(cd $(dirname $0) && pwd)
 clean_sources=
 distclean_sources=
 remove_sources=
-remove_qemu_sources=
 remove_archives=
 remove_installation=
 remove_prefix=
@@ -22,7 +21,6 @@ while [ $# -gt 0 ]; do
     --clean) shift; clean_sources=y; break;;
     --distclean) shift; distclean_sources=y; break;;
     --sources) shift; remove_sources=y; break;;
-    --qemu-sources) shift; remove_qemu_sources=y; break;;
     --archives) shift; remove_archives=y; break;;
     --installation) shift; remove_installation=y; break;;
     --prefix) shift; remove_prefix=y; break;;
@@ -78,12 +76,6 @@ if [ -n "$remove_sources" ]; then
     exit
 fi
 
-if [ -n "$remove_qemu_sources" ]; then
-    cd $SRCDIR
-    $RM -r $DIR_QEMU
-    exit
-fi
-
 if [ -n "$remove_archives" ]; then
     cd $ARCDIR
     $RM $PKG_BINUTILS
@@ -101,8 +93,6 @@ if [ -n "$distclean_sources" ]; then
     rm -rf build
     cd $SRCDIR/$DIR_GDB
     make distclean
-    cd $SRCDIR/$DIR_QEMU
-    make distclean
     exit
 fi
 
@@ -112,8 +102,6 @@ if [ -n "$clean_sources" ]; then
     cd $SRCDIR/$DIR_GCC/build
     make clean
     cd $SRCDIR/$DIR_GDB
-    make clean
-    cd $SRCDIR/$DIR_QEMU
     make clean
     exit
 fi
