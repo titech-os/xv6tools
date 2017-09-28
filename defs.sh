@@ -3,7 +3,7 @@
 # Takuo Watanabe
 # (see http://pdos.csail.mit.edu/6.828/2014/tools.html)
 
-PREFIX=${PREFIX:-/opt/os}
+PREFIX=${PREFIX:-/usr/local/os}
 #PREFIX=~/xv6tools
 SRCDIR=${SRCDIR:-$PREFIX/src}
 ARCDIR=${ARCDIR:-$SRCDIR/archive}
